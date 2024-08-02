@@ -1,0 +1,12 @@
+{
+    "parserOptions": {
+        "project": "./tsconfig.json"
+    },
+    "extends": [
+        "airbnb-base",
+        "airbnb-typescript/base",
+        "plugin:sonarjs/recommended-legacy",
+        "prettier"
+    ],
+    "plugins": ["sonarjs"]
+}
