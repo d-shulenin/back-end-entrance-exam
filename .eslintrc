@@ -8,5 +8,9 @@
         "plugin:sonarjs/recommended-legacy",
         "prettier"
     ],
-    "plugins": ["sonarjs"]
+    "plugins": ["sonarjs"],
+    "rules": {
+        "@typescript-eslint/lines-between-class-members": 0,
+        "import/prefer-default-export": 0
+    }
 }
