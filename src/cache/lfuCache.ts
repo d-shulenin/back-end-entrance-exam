@@ -36,7 +36,7 @@ class LFUCache {
     get(key: string): unknown {
         if (!this.has(key)) {
             console.log(`Значения по ключу "${key}" нет в кеше`);
-            return -1;
+            return;
         }
 
         const node = this.mapOfNodes[key];
