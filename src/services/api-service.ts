@@ -1,5 +1,4 @@
 import axios from "axios";
-import { ApiError } from "@/exceptions";
 
 const { API_BASE_URL, API_KEY } = process.env;
 
@@ -10,35 +9,32 @@ const api = axios.create({
     }
 });
 
+api.interceptors.request.use((request) => {
+    console.log(
+        `Выполняется ${request.method} запрос на эндпоинт ${request.url}`
+    );
+    return request;
+});
+
 class ApiService {
     async getBook() {
-        const response = await api.get("/book");
-        return response.data;
+        const { data } = await api.get("/book");
+        return data.docs;
     }
 
     async getBookById(id: string) {
-        const response = await api.get(`/book/${id}`);
-
-        if (!response.data.success) {
-            throw ApiError.BadRequest("Книги с таким id не существует");
-        }
-
-        return response.data;
+        const { data } = await api.get(`/book/${id}`);
+        return data.docs[0];
     }
 
     async getCharacter() {
-        const response = await api.get("/character");
-        return response.data;
+        const { data } = await api.get("/character");
+        return data.docs;
     }
 
     async getCharacterById(id: string) {
-        const response = await api.get(`/character/${id}`);
-
-        if (!response.data.success) {
-            throw ApiError.BadRequest("Персонажа с таким id не существует");
-        }
-
-        return response.data;
+        const { data } = await api.get(`/character/${id}`);
+        return data.docs[0];
     }
 }
 

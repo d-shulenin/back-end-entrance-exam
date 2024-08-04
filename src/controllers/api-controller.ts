@@ -1,10 +1,16 @@
 import type { NextFunction, Request, Response } from "express";
 import { apiService } from "@/services";
+import { cache } from "@/cache";
 
 class ApiController {
-    async getBook(req: Request, res: Response) {
-        const data = await apiService.getBook();
-        return res.send(data);
+    async getBook(req: Request, res: Response, next: NextFunction) {
+        try {
+            const data = await apiService.getBook();
+            cache.put(req.path, data);
+            return res.json(data);
+        } catch (e) {
+            return next(e);
+        }
     }
 
     async getBookById(req: Request, res: Response, next: NextFunction) {
@@ -12,15 +18,21 @@ class ApiController {
 
         try {
             const data = await apiService.getBookById(id);
-            return res.send(data);
+            cache.put(req.path, data);
+            return res.json(data);
         } catch (e) {
-            next(e);
+            return next(e);
         }
     }
 
-    async getCharacter(req: Request, res: Response) {
-        const data = await apiService.getCharacter();
-        return res.send(data);
+    async getCharacter(req: Request, res: Response, next: NextFunction) {
+        try {
+            const data = await apiService.getCharacter();
+            cache.put(req.path, data);
+            return res.json(data);
+        } catch (e) {
+            return next(e);
+        }
     }
 
     async getCharacterById(req: Request, res: Response, next: NextFunction) {
@@ -28,9 +40,10 @@ class ApiController {
 
         try {
             const data = await apiService.getCharacterById(id);
-            return res.send(data);
+            cache.put(req.path, data);
+            return res.json(data);
         } catch (e) {
-            next(e);
+            return next(e);
         }
     }
 }

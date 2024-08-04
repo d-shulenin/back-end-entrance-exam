@@ -5,7 +5,7 @@ class LFUCache {
     static instance: LFUCache;
 
     constructor(
-        private capacity: number,
+        private capacity: number = 3,
         private size: number = 0,
         private mapOfLists: Record<number, DoubleLinkedList> = {}, // map frequency -> double-linked list
         private mapOfNodes: Record<string, Node> = {}
@@ -17,14 +17,25 @@ class LFUCache {
         LFUCache.instance = this;
     }
 
+    view() {
+        const rawCache: Record<string, unknown> = {};
+
+        for (const key in this.mapOfNodes) {
+            if (Object.hasOwn(this.mapOfNodes, key)) {
+                rawCache[key] = this.mapOfNodes[key].value;
+            }
+        }
+
+        return rawCache;
+    }
+
     has(key: string): boolean {
-        // TODO: добавить логирование
         return key in this.mapOfNodes;
     }
 
     get(key: string): unknown {
         if (!this.has(key)) {
-            // TODO: добавить логирование
+            console.log(`Значения по ключу "${key}" нет в кеше`);
             return -1;
         }
 
@@ -44,7 +55,7 @@ class LFUCache {
         }
 
         this.mapOfLists[node.count].addNode(node);
-        // TODO: добавить логирование
+        console.log(`Значение по ключу "${key}" взято из кеша`);
         return node.value;
     }
 
@@ -69,6 +80,7 @@ class LFUCache {
                 const list = this.mapOfLists[smallestFrequency];
                 const nodeToEvict = list.popLast();
                 delete this.mapOfNodes[nodeToEvict.key];
+                console.log(`Значение по ключу "${key}" удалено из кеша`);
 
                 if (list.size === 0) {
                     delete this.mapOfLists[nodeToEvict.count];
@@ -79,6 +91,7 @@ class LFUCache {
 
             node = new Node(key, value);
             this.mapOfNodes[key] = node;
+            console.log(`Значение по ключу "${key}" добавлено в кеш`);
         } else {
             node = this.mapOfNodes[key];
 
@@ -91,6 +104,7 @@ class LFUCache {
 
             node.value = value;
             node.count += 1;
+            console.log(`Значение по ключу "${key}" обновлено в кеше`);
         }
 
         if (!this.mapOfLists[node.count]) {
@@ -98,12 +112,11 @@ class LFUCache {
         }
 
         this.mapOfLists[node.count].addNode(node);
-        // TODO: добавить логирование
     }
 
     delete(key: string): void {
         if (!this.has(key)) {
-            // TODO: добавить логирование
+            console.log(`Значения по ключу "${key}" нет в кеше`);
             return;
         }
 
@@ -118,20 +131,20 @@ class LFUCache {
 
         delete this.mapOfNodes[node.key];
         this.size -= 1;
-        // TODO: добавить логирование
+        console.log(`Значение по ключу "${key}" удалено из кеша`);
     }
 
     clear(): void {
-        // TODO: добавить логирование
         this.size = 0;
         this.mapOfLists = {};
         this.mapOfNodes = {};
+        console.log("Кеш очищен");
     }
 
     setCapacity(value: number) {
-        // TODO: добавить логирование
         this.capacity = value;
+        console.log("Размер кеша изменён. Новое значение:", value);
     }
 }
 
-export { LFUCache };
+export const cache = new LFUCache();

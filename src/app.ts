@@ -3,8 +3,9 @@ import "dotenv/config";
 import express from "express";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
-import { apiRouter } from "@/routes";
+import { apiRouter, cacheRouter } from "@/routes";
 import { errorMiddleware } from "@/middlewares";
+import { ApiError } from "./exceptions";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -33,6 +34,11 @@ app.use(express.json());
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 app.use("/api", apiRouter);
+app.use("/cache", cacheRouter);
+
+app.all("*", (req, res, next) =>
+    next(ApiError.BadRequest("Такого эндпоинта не существует"))
+);
 
 app.use(errorMiddleware);
 /**
