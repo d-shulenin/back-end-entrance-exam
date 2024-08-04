@@ -18,7 +18,7 @@ export class DoubleLinkedList {
         node.prev = this.left;
         node.next = this.left.next;
         this.left.next = node;
-        this.size++;
+        this.size += 1;
     }
 
     removeNode(node: Node) {
@@ -26,7 +26,7 @@ export class DoubleLinkedList {
         node.next!.prev = node.prev;
         node.next = null;
         node.prev = null;
-        this.size--;
+        this.size -= 1;
     }
 
     popLast(): Node {

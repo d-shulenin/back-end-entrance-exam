@@ -10,11 +10,14 @@
     ],
     "plugins": ["sonarjs"],
     "rules": {
-        "@typescript-eslint/consistent-type-imports": 1,
+        "@typescript-eslint/consistent-type-imports": 2,
         "@typescript-eslint/lines-between-class-members": 0,
+        "import/extensions": [0, "never"],
         "import/prefer-default-export": 0,
+        "import/no-default-export": 2,
         "no-param-reassign": 0,
-        "no-constructor-return": 1,
-        "no-restricted-syntax": 1
+        "no-constructor-return": 0,
+        "no-restricted-syntax": 0,
+        "class-methods-use-this": 0
     }
 }
