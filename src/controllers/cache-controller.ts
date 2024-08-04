@@ -71,7 +71,7 @@ class CacheController {
         if (Number.isNaN(parsedValue)) {
             return next(
                 ApiError.BadRequest(
-                    "Невалидный value в параметрах. value должно быть числом."
+                    "Невалидное value в параметрах. value должно быть числом."
                 )
             );
         }

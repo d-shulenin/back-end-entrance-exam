@@ -7,11 +7,14 @@ const mapAxiosErrorStatusToMessage = (
     message: string,
     status?: HttpStatusCode
 ): string => {
-    if (status === 429) {
-        return "Превышен лимит запросов";
+    switch (status) {
+        case 429:
+            return "Превышен лимит запросов";
+        case 500:
+            return "Что-то пошло не так";
+        default:
+            return message;
     }
-
-    return message;
 };
 
 export const errorMiddleware = (
@@ -26,9 +29,9 @@ export const errorMiddleware = (
     }
 
     if (err instanceof AxiosError) {
-        const { status, message } = err;
+        const { status = 500, message } = err;
 
-        return res.json({
+        return res.status(status).json({
             message: mapAxiosErrorStatusToMessage(message, status)
         });
     }
