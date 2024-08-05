@@ -22,7 +22,5 @@ app.all("*", (req, res, next) =>
 app.use(errorMiddleware);
 
 app.listen(SERVER_PORT, () => {
-    console.log("test");
-
     console.log(`Сервер запущен на порту ${SERVER_PORT}`);
 });
