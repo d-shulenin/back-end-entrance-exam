@@ -24,3 +24,6 @@ app.use(errorMiddleware);
 app.listen(SERVER_PORT, () => {
     console.log(`Сервер запущен на порту ${SERVER_PORT}`);
 });
+
+// eslint-disable-next-line import/no-default-export
+export default app;
