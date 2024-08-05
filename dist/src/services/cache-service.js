@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.cacheService = void 0;
-const cache_1 = require("@/cache");
+const cache_1 = require("../cache");
 class CacheService {
     getValue(key) {
         const value = cache_1.cache.get(key);

@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.apiRouter = void 0;
 const express_1 = require("express");
-const controllers_1 = require("@/controllers");
-const middlewares_1 = require("@/middlewares");
+const controllers_1 = require("../controllers");
+const middlewares_1 = require("../middlewares");
 const apiRouter = (0, express_1.Router)();
 exports.apiRouter = apiRouter;
 apiRouter.use(middlewares_1.cacheMiddleware);

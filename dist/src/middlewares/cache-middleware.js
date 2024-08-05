@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.cacheMiddleware = void 0;
-const cache_1 = require("@/cache");
+const cache_1 = require("../cache");
 const cacheMiddleware = (req, res, next) => {
     const key = req.path;
     if (cache_1.cache.has(key)) {

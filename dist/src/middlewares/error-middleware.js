@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.errorMiddleware = void 0;
 const axios_1 = require("axios");
-const exceptions_1 = require("@/exceptions");
+const exceptions_1 = require("../exceptions");
 const mapAxiosErrorStatusToMessage = (message, status) => {
     switch (status) {
         case 429:

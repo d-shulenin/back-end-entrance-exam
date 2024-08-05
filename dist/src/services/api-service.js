@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.apiService = void 0;
 const axios_1 = __importDefault(require("axios"));
-const env_1 = require("@/env");
+const env_1 = require("../env");
 const { API_BASE_URL, API_KEY } = env_1.env;
 const api = axios_1.default.create({
     baseURL: API_BASE_URL,

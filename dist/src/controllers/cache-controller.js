@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.cacheController = void 0;
-const services_1 = require("@/services");
-const exceptions_1 = require("@/exceptions");
+const services_1 = require("../services");
+const exceptions_1 = require("../exceptions");
 class CacheController {
     getValue(req, res, next) {
         const { key } = req.query;

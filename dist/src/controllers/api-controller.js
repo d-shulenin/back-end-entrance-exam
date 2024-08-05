@@ -10,8 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.apiController = void 0;
-const services_1 = require("@/services");
-const cache_1 = require("@/cache");
+const services_1 = require("../services");
+const cache_1 = require("../cache");
 class ApiController {
     getBook(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {

@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.specs = void 0;
 const swagger_jsdoc_1 = __importDefault(require("swagger-jsdoc"));
-const env_1 = require("@/env");
+const env_1 = require("../env");
 const { SERVER_PORT } = env_1.env;
 const options = {
     definition: {
